@@ -1,10 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.BankTransitionStimulator" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:statusBarColor">@color/white</item>
-    </style>
+        <!-- App Theme -->
+                <item name="android:statusBarColor">#FFFFFF</item> <!-- White -->
+                <item name="android:navigationBarColor">#FFFFFF</item> <!-- Optional -->
+                <item name="android:windowLightStatusBar">true</item> <!-- Makes status bar text dark -->
+            </style>
+
 
     <style name="Theme.BankTransitionStimulator" parent="Base.Theme.BankTransitionStimulator" />
 </resources>

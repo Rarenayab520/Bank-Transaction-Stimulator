@@ -1,59 +1,69 @@
 package com.nayab.banktransitionstimulator
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import android.widget.*
-
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var etAmount: EditText
-    private lateinit var tvBalance: TextView
-    private lateinit var tvMessage: TextView
+    private lateinit var amountInput: EditText
+    private lateinit var cardBalanceText: TextView
+    private lateinit var activeBalanceText: TextView
+    private lateinit var messageText: TextView
+
     private val account = BankAccount()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main) // ← your new layout
 
-        etAmount = findViewById(R.id.etAmount)
-        tvBalance = findViewById(R.id.tvBalance)
-        tvMessage = findViewById(R.id.tvMessage)
+        // Bind views from your new layout
+        amountInput = findViewById(R.id.amountValue)
+        cardBalanceText = findViewById(R.id.cardBalance)
+        activeBalanceText = findViewById(R.id.activeBalance)
+        messageText = findViewById(R.id.tvMessage) // optional - add this TextView if you want messages
 
-        findViewById<Button>(R.id.btnDeposit).setOnClickListener { performTransaction(true) }
-        findViewById<Button>(R.id.btnWithdraw).setOnClickListener { performTransaction(false) }
+        findViewById<MaterialButton>(R.id.btnDepositRequest).setOnClickListener {
+            performTransaction(true)
+        }
+
+        findViewById<MaterialButton>(R.id.btnWithdrawRequest)?.setOnClickListener {
+            performTransaction(false)
+        }
 
         updateBalance()
     }
 
     private fun performTransaction(isDeposit: Boolean) {
-        val input = etAmount.text.toString()
+        val input = amountInput.text.toString()
         try {
             val amount = input.toDouble()
+
             if (isDeposit) account.deposit(amount)
             else account.withdraw(amount)
 
-            tvMessage.setTextColor(getColor(R.color.green))
-            tvMessage.text = if (isDeposit) "Deposited $$amount" else "Withdrew $$amount"
+            messageText.setTextColor(getColor(R.color.green))
+            messageText.text = if (isDeposit) "Deposited $$amount" else "Withdrew $$amount"
+
         } catch (e: InsufficientBalanceException) {
-            tvMessage.setTextColor(getColor(R.color.red))
-            tvMessage.text = e.message
+            messageText.setTextColor(getColor(R.color.red))
+            messageText.text = e.message
         } catch (e: IllegalArgumentException) {
-            tvMessage.setTextColor(getColor(R.color.red))
-            tvMessage.text = e.message
+            messageText.setTextColor(getColor(R.color.red))
+            messageText.text = e.message
         } catch (e: Exception) {
-            tvMessage.setTextColor(getColor(R.color.red))
-            tvMessage.text = "Invalid input!"
+            messageText.setTextColor(getColor(R.color.red))
+            messageText.text = "Invalid input!"
         } finally {
             updateBalance()
-            etAmount.text.clear()
+            amountInput.text.clear()
         }
     }
 
     private fun updateBalance() {
-        tvBalance.text = "Current Balance: $${String.format("%.2f", account.getBalance())}"
+        val balanceText = "$${String.format("%.2f", account.getBalance())}"
+        cardBalanceText.text = balanceText
+        activeBalanceText.text = "Active Balance  $balanceText"
     }
 }
