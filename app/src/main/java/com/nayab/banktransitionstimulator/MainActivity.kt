@@ -15,7 +15,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main) // ← your new layout
+        setContentView(R.layout.activity_main)
+        // Make status bar white with black icons
+        window.statusBarColor = getColor(android.R.color.white)
+        window.decorView.systemUiVisibility =
+            window.decorView.systemUiVisibility or android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
 
         // Bind views from your new layout
         amountInput = findViewById(R.id.etAmount)
