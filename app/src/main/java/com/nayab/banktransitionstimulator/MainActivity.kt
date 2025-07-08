@@ -9,7 +9,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var amountInput: EditText
     private lateinit var cardBalanceText: TextView
-    private lateinit var activeBalanceText: TextView
     private lateinit var messageText: TextView
 
     private val account = BankAccount()
@@ -19,16 +18,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main) // ← your new layout
 
         // Bind views from your new layout
-        amountInput = findViewById(R.id.amountValue)
+        amountInput = findViewById(R.id.etAmount)
         cardBalanceText = findViewById(R.id.cardBalance)
-        activeBalanceText = findViewById(R.id.activeBalance)
         messageText = findViewById(R.id.tvMessage) // optional - add this TextView if you want messages
 
-        findViewById<MaterialButton>(R.id.btnDepositRequest).setOnClickListener {
+        findViewById<MaterialButton>(R.id.btnDeposit).setOnClickListener {
             performTransaction(true)
         }
 
-        findViewById<MaterialButton>(R.id.btnWithdrawRequest)?.setOnClickListener {
+        findViewById<MaterialButton>(R.id.btnWithdraw)?.setOnClickListener {
             performTransaction(false)
         }
 
@@ -43,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             if (isDeposit) account.deposit(amount)
             else account.withdraw(amount)
 
-            messageText.setTextColor(getColor(R.color.green))
+            messageText.setTextColor(getColor(R.color.primaryDark))
             messageText.text = if (isDeposit) "Deposited $$amount" else "Withdrew $$amount"
 
         } catch (e: InsufficientBalanceException) {
@@ -64,6 +62,5 @@ class MainActivity : AppCompatActivity() {
     private fun updateBalance() {
         val balanceText = "$${String.format("%.2f", account.getBalance())}"
         cardBalanceText.text = balanceText
-        activeBalanceText.text = "Active Balance  $balanceText"
     }
 }
