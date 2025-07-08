@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         // Bind views from your new layout
         amountInput = findViewById(R.id.etAmount)
-        cardBalanceText = findViewById(R.id.cardBalance)
+        cardBalanceText = findViewById(R.id.tvBalance)
         messageText = findViewById(R.id.tvMessage) // optional - add this TextView if you want messages
 
         findViewById<MaterialButton>(R.id.btnDeposit).setOnClickListener {

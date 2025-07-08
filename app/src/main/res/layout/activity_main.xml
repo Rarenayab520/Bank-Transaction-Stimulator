@@ -103,23 +103,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
         android:hint="Enter amount"
         app:boxCornerRadiusTopStart="16dp"
         app:boxCornerRadiusTopEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"
         app:boxCornerRadiusBottomEnd="16dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_marginBottom="20dp">
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="@color/white"
+        app:hintTextColor="@color/hint_grey">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etAmount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:textColor="@android:color/white"
-            android:textColorHint="#DDDDDD"
-            android:padding="12dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:textColor="@color/black"
+        android:textColorHint="#947D7D"
+        android:padding="12dp"/>
+</com.google.android.material.textfield.TextInputLayout>
 
     <!-- Buttons -->
     <LinearLayout

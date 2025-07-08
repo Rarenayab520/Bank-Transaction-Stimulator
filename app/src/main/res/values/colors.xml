@@ -6,5 +6,7 @@
     <color name="green">#037508</color>
     <color name="primaryDark">#1D2671</color>
     <color name="button">#3A86FF</color>
+     <color name="hint_grey">#9E9E9E</color>
+
 
 </resources>
